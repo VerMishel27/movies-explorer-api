@@ -1,0 +1,13 @@
+const router = require('express').Router();
+const userRouter = require('./users');
+const movieRouter = require('./movie');
+const { createUser, loginUser } = require('../controllers/users');
+const { auth } = require('../middlewares/auth');
+const { createUserValidator, authenticateValidator } = require('../middlewares/customValidator');
+
+router.use('/users', auth, userRouter);
+router.use('/movies', auth, movieRouter);
+router.post('/signin', authenticateValidator, loginUser);
+router.post('/signup', createUserValidator, createUser);
+
+module.exports = router;
