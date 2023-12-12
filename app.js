@@ -21,10 +21,7 @@ const { PORT = 3000 } = process.env;
 
 app.use(express.json());
 
-mongoose.connect(DB_ADDRESS, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(DB_ADDRESS);
 
 app.use(requestLogger);
 
