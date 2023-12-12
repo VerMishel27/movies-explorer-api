@@ -11,17 +11,17 @@ const infoUserValidator = celebrate({
 
 const postMovieValidator = celebrate({
   body: Joi.object().keys({
-    country: Joi.string().required().min(2).max(30),
-    director: Joi.string().required().min(2).max(30),
+    country: Joi.string().required(),
+    director: Joi.string().required(),
     duration: Joi.number().required(),
     year: Joi.string().required(),
-    description: Joi.string().required().min(2),
+    description: Joi.string().required(),
     image: Joi.string().required().pattern(new RegExp(regex)),
     trailerLink: Joi.string().required().pattern(new RegExp(regex)),
     thumbnail: Joi.string().required().pattern(new RegExp(regex)),
     movieId: Joi.number().required(),
-    nameRU: Joi.string().required().min(2).max(30),
-    nameEN: Joi.string().required().min(2).max(30),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
   }),
 });
 

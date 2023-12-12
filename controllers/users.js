@@ -86,6 +86,9 @@ const updateInfoUser = async (req, res, next) => {
       });
     })
     .catch((error) => {
+      if (error.code === MONGO_DUPLCATE_ERROR_CODE) {
+        return next(new FoundError('Пользователь с таким email уже существует!', 409));
+      }
       if (error.name === 'ValidationError') {
         next(new FoundError('Переданы некорректные данные при обновлении профиля.', 400));
       }
@@ -107,7 +110,7 @@ const loginUser = async (req, res, next) => {
       throw new FoundError('Не правильные email или пароль!', 401);
     }
 
-    const token = generateToken({ _id: userAdmin._id, email: userAdmin.email }, NODE_ENV !== 'production' ? JWT_SECRET : 'dev_secret');
+    const token = generateToken({ _id: userAdmin._id, email: userAdmin.email }, NODE_ENV === 'production' ? JWT_SECRET : 'dev_secret');
 
     return res.status(200).send({ token });
   } catch (error) {

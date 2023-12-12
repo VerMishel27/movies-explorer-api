@@ -10,14 +10,13 @@ const router = require('./routes');
 const app = express();
 
 const { errorHandler } = require('./middlewares/error-handler');
-const { FoundError } = require('./middlewares/foundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { DB_ADDRESS } = require('./constants/constants');
+const { ADDRESS_DB } = require('./constants/constants');
 const { cors } = require('./middlewares/cors');
 
 app.use(cors);
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, DB_ADDRESS = ADDRESS_DB  } = process.env;
 
 app.use(express.json());
 
@@ -36,10 +35,6 @@ app.use(router);
 app.use(errorLogger);
 
 app.use(errors());
-
-app.use(() => {
-  throw new FoundError('Страница не найдена', 404);
-});
 
 app.use(errorHandler);
 
