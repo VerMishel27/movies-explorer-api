@@ -13,7 +13,7 @@ const auth = (req, res, next) => {
     }
 
     const validTocken = token.replace('Bearer ', '');
-    payload = jwt.verify(validTocken, NODE_ENV !== 'production' ? 'dev_secret' : JWT_SECRET);
+    payload = jwt.verify(validTocken, NODE_ENV !== 'production' ? JWT_SECRET : 'dev_secret');
   } catch (error) {
     if (error.name === 'JsonWebTokenError') {
       next(new FoundError('С токеном что-то не так!', 401));

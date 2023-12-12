@@ -4,7 +4,7 @@ const { FoundError } = require('../middlewares/foundError');
 const getMovie = async (req, res, next) => {
   const owner = req.user._id;
   try {
-    const movie = await Movie.find({owner});
+    const movie = await Movie.find({ owner });
 
     return res.status(200).send(movie);
   } catch (error) {
