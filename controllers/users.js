@@ -110,7 +110,7 @@ const loginUser = async (req, res, next) => {
       throw new FoundError('Не правильные email или пароль!', 401);
     }
 
-    const token = generateToken({ _id: userAdmin._id, email: userAdmin.email }, NODE_ENV !== 'production' ? JWT_SECRET : 'dev_secret');
+    const token = generateToken({ _id: userAdmin._id, email: userAdmin.email }, NODE_ENV === 'production' ? JWT_SECRET : 'dev_secret');
 
     return res.status(200).send({ token });
   } catch (error) {
