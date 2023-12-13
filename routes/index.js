@@ -10,8 +10,8 @@ router.use('/users', auth, userRouter);
 router.use('/movies', auth, movieRouter);
 router.post('/signin', authenticateValidator, loginUser);
 router.post('/signup', createUserValidator, createUser);
-router.use('*', auth, () => {
-  throw new FoundError('Страница не найдена', 404);
-});
+// router.use('*', auth, () => {
+//   throw new FoundError('Страница не найдена', 404);
+// });
 
 module.exports = router;
