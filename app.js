@@ -16,11 +16,11 @@ const { cors } = require('./middlewares/cors');
 
 app.use(cors);
 
-const { PORT = 3000, DB_ADDRESS = ADDRESS_DB } = process.env;
+const { NODE_ENV, PORT = 3000, DB_ADDRESS } = process.env;
 
 app.use(express.json());
 
-mongoose.connect(DB_ADDRESS);
+mongoose.connect(NODE_ENV === 'production' ? DB_ADDRESS : ADDRESS_DB);
 
 app.use(requestLogger);
 
