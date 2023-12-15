@@ -12,16 +12,16 @@ const { errorHandler } = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { ADDRESS } = require('./constants/constants');
 const { cors } = require('./middlewares/cors');
-const { auth } = require('./middlewares/auth');
+//const { auth } = require('./middlewares/auth');
 const { FoundError } = require('./middlewares/foundError');
 
 app.use(cors);
 
-const { PORT = 3000, DB_ADDRESS = ADDRESS } = process.env;
+const { PORT = 3000 } = process.env;
 
 app.use(express.json());
 
-mongoose.connect(DB_ADDRESS);
+mongoose.connect(ADDRESS);
 
 app.use(requestLogger);
 
