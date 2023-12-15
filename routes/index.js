@@ -4,14 +4,10 @@ const movieRouter = require('./movie');
 const { createUser, loginUser } = require('../controllers/users');
 const { auth } = require('../middlewares/auth');
 const { createUserValidator, authenticateValidator } = require('../middlewares/customValidator');
-const { FoundError } = require('../middlewares/foundError');
 
-router.post('/signin', authenticateValidator, loginUser);
-router.post('/signup', createUserValidator, createUser);
 router.use('/users', auth, userRouter);
 router.use('/movies', auth, movieRouter);
-router.use('*', auth, () => {
-  throw new FoundError('Страница не найдена', 404);
-});
+router.post('/signin', authenticateValidator, loginUser);
+router.post('/signup', createUserValidator, createUser);
 
 module.exports = router;

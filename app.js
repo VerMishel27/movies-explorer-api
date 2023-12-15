@@ -12,14 +12,16 @@ const { errorHandler } = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { ADDRESS_DB } = require('./constants/constants');
 const { cors } = require('./middlewares/cors');
+const { auth } = require('./middlewares/auth');
+const { FoundError } = require('./middlewares/foundError');
 
 app.use(cors);
 
-const { NODE_ENV, PORT = 3000, DB_ADDRESS } = process.env;
+const { PORT = 3000, DB_ADDRESS = ADDRESS_DB } = process.env;
 
 app.use(express.json());
 
-mongoose.connect(NODE_ENV === 'production' ? DB_ADDRESS : ADDRESS_DB);
+mongoose.connect(DB_ADDRESS);
 
 app.use(requestLogger);
 
@@ -34,6 +36,10 @@ app.use(router);
 app.use(errorLogger);
 
 app.use(errors());
+
+app.use(auth, () => {
+  throw new FoundError('Страница не найдена', 404);
+});
 
 app.use(errorHandler);
 
