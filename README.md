@@ -17,7 +17,7 @@
 
 ## Ссылки на проект
 
-IP 158.160.108.24
+IP 158.160.122.139
 
 Frontend https://movies-web.nomoredomainsmonster.ru
 
