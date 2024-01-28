@@ -1,6 +1,7 @@
 const { celebrate, Joi } = require('celebrate');
 
 const regex = /^(https?:\/\/)?([\da-zA-Z.\-?]+).([a-z.]{2,6})([/\w.-]*)*\/?$/;
+const regexLink = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/;
 
 const infoUserValidator = celebrate({
   body: Joi.object().keys({
@@ -17,7 +18,7 @@ const postMovieValidator = celebrate({
     year: Joi.string().required(),
     description: Joi.string().required(),
     image: Joi.string().required().pattern(new RegExp(regex)),
-    trailerLink: Joi.string().required().pattern(new RegExp(regex)),
+    trailerLink: Joi.string().required().pattern(new RegExp(regexLink)),
     thumbnail: Joi.string().required().pattern(new RegExp(regex)),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),

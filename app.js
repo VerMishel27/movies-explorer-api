@@ -3,6 +3,7 @@ const express = require('express');
 
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+// const cors = require('cors')
 
 const router = require('./routes');
 
@@ -13,12 +14,14 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { ADDRESS } = require('./constants/constants');
 const { cors } = require('./middlewares/cors');
 
+
 app.use(cors);
+
 
 const { PORT = 3000, DB_ADDRESS = ADDRESS } = process.env;
 
 app.use(express.json());
-
+app.use(cors())
 mongoose.connect(DB_ADDRESS);
 
 app.use(requestLogger);
