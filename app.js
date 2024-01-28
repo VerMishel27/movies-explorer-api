@@ -21,7 +21,7 @@ app.use(cors);
 const { PORT = 3000, DB_ADDRESS = ADDRESS } = process.env;
 
 app.use(express.json());
-app.use(cors())
+
 mongoose.connect(DB_ADDRESS);
 
 app.use(requestLogger);
